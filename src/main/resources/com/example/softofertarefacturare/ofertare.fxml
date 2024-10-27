@@ -5,6 +5,8 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -32,7 +34,7 @@
                     </rowConstraints>
                      <children>
                         <Label text="Denumire Produs: " />
-                        <TextField prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1" />
+                        <TextField fx:id="DenumireProdus" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1" />
                         <Label text="Alege Procesele Necesare:" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets bottom="16.0" top="16.0" />
@@ -55,19 +57,51 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <CheckBox mnemonicParsing="false" text="Prelucrare Abkant CNC" />
-                        <CheckBox mnemonicParsing="false" text="Debitare Laser CNC" GridPane.rowIndex="1" />
-                        <CheckBox mnemonicParsing="false" text="Debitare Ghilotina CNC" GridPane.columnIndex="3" />
-                        <CheckBox mnemonicParsing="false" text="Sudura MIG-MAG" GridPane.columnIndex="1" />
-                        <CheckBox mnemonicParsing="false" text="Debitare Fierastra" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <CheckBox mnemonicParsing="false" text="Gaurire" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                        <CheckBox mnemonicParsing="false" text="Polizare" GridPane.columnIndex="2" />
-                        <CheckBox mnemonicParsing="false" text="Vopsit" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                        <CheckBox mnemonicParsing="false" text="Zincat" GridPane.columnIndex="4" />
+                        <CheckBox fx:id="AbkantCheckBox" mnemonicParsing="false" onAction="#AbkantSelected" text="Prelucrare Abkant CNC" />
+                        <CheckBox fx:id="LaserCheckBox" mnemonicParsing="false" onAction="#LaserSelected" text="Debitare Laser CNC" GridPane.rowIndex="1" />
+                        <CheckBox fx:id="GhilotinaCheckBox" mnemonicParsing="false" onAction="#GhilotinaSelected" text="Debitare Ghilotina CNC" GridPane.columnIndex="3" />
+                        <CheckBox fx:id="SuduraCheckBox" mnemonicParsing="false" onAction="#SuduraSelected" text="Sudura MIG-MAG" GridPane.columnIndex="1" />
+                        <CheckBox fx:id="FierastrauCheckBox" mnemonicParsing="false" onAction="#FierastrauSelected" text="Debitare Fierastra" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <CheckBox fx:id="GaurireCheckBox" mnemonicParsing="false" onAction="#GaurireSelected" text="Gaurire" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                        <CheckBox fx:id="PolizareCheckBox" mnemonicParsing="false" onAction="#PolizareSelected" text="Polizare" GridPane.columnIndex="2" />
+                        <CheckBox fx:id="VopsitCheckBox" mnemonicParsing="false" onAction="#VopsitSelected" text="Vopsit" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <CheckBox fx:id="ZincatCheckBox" mnemonicParsing="false" onAction="#ZincatSelected" text="Zincat" GridPane.columnIndex="4" />
                      </children>
                   </GridPane>
-                  <ComboBox prefHeight="25.0" prefWidth="363.0" promptText="Alege Tipul de Material" />
-                  <VBox prefHeight="580.0" prefWidth="763.0" />
+                  <GridPane>
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <ComboBox fx:id="MaterialComboBox" prefHeight="25.0" prefWidth="363.0" promptText="Alege Tipul de Material" />
+                        <Button fx:id="AdaugaMatButton" mnemonicParsing="false" onAction="#AdaugaMaterial" text="Adauga Material" GridPane.columnIndex="1">
+                           <GridPane.margin>
+                              <Insets left="8.0" />
+                           </GridPane.margin>
+                        </Button>
+                        <Button fx:id="AdaugaMatNouButton" mnemonicParsing="false" onAction="#AdaugaMaterialNou" text="Adauga Material Nou" GridPane.columnIndex="2" />
+                     </children>
+                  </GridPane>
+                  <VBox prefHeight="580.0" prefWidth="763.0">
+                     <children>
+                        <TableView prefHeight="200.0" prefWidth="200.0">
+                          <columns>
+                            <TableColumn fx:id="Denumire" prefWidth="229.0" text="Denumire" />
+                            <TableColumn fx:id="UnitateMasura" prefWidth="147.0" text="Unitate de masura" />
+                              <TableColumn fx:id="Cantitate" prefWidth="144.0" text="Cantitate" />
+                              <TableColumn fx:id="Pret" prefWidth="114.0" text="Pret" />
+                          </columns>
+                           <VBox.margin>
+                              <Insets top="32.0" />
+                           </VBox.margin>
+                        </TableView>
+                     </children>
+                  </VBox>
                   <GridPane>
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -79,12 +113,12 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="24.0" prefWidth="276.0" text="Adauga produs in comanda" GridPane.halignment="CENTER">
+                        <Button fx:id="AdaugaProdComButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#AdaugaProdusComanda" prefHeight="24.0" prefWidth="276.0" text="Adauga produs in comanda" GridPane.halignment="CENTER">
                            <padding>
                               <Insets right="32.0" />
                            </padding>
                         </Button>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="24.0" prefWidth="277.0" text="Adauga alt produs " GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#AdaugaNewProdus" prefHeight="24.0" prefWidth="277.0" text="Adauga alt produs " GridPane.columnIndex="1" GridPane.halignment="CENTER">
                            <padding>
                               <Insets left="32.0" />
                            </padding>
@@ -97,7 +131,7 @@
                <children>
                   <VBox prefHeight="823.0" prefWidth="383.0">
                      <children>
-                        <Label alignment="CENTER" prefHeight="17.0" prefWidth="390.0" style="-fx-background-color: white;" text="Comanda: ">
+                        <Label fx:id="DenumireComanda" alignment="CENTER" prefHeight="17.0" prefWidth="390.0" style="-fx-background-color: white;" text="Comanda: ">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
@@ -110,12 +144,10 @@
                           </columnConstraints>
                           <rowConstraints>
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Button mnemonicParsing="false" text="Creaza Oferta de Pret" GridPane.halignment="CENTER" />
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="140.0" text="Creaza Factura" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                              <Button mnemonicParsing="false" onAction="#CreazaOfertaPret" text="Creaza Oferta de Pret" GridPane.halignment="CENTER" />
+                              <Button mnemonicParsing="false" onAction="#CreazaFactura" prefHeight="25.0" prefWidth="140.0" text="Creaza Factura" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
                            </children>
                            <padding>
                               <Insets left="16.0" right="16.0" />
