@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proiect2.Main.MainController">
+        <VBox>
+            <TitledPane animated="false" prefHeight="450.0" prefWidth="500.0" text="Tabla" >
+                <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                        <children>
+                            <GridPane layoutX="16.0" layoutY="16.0" prefWidth="443.0" vgap="8.0">
+                                <columnConstraints>
+                                    <ColumnConstraints percentWidth="50.0" />
+                                    <ColumnConstraints percentWidth="50.0" />
+                        <ColumnConstraints />
+                                </columnConstraints>
+                                <rowConstraints>
+                                    <RowConstraints maxHeight="Infinity" minHeight="30" prefHeight="30" />
+                                    <RowConstraints maxHeight="Infinity" minHeight="30" prefHeight="30" />
+                                    <RowConstraints maxHeight="Infinity" minHeight="30" prefHeight="30" />
+                                    <RowConstraints maxHeight="Infinity" minHeight="30" prefHeight="30" />
+                                    <RowConstraints maxHeight="Infinity" minHeight="30" prefHeight="30" />
+                                    <RowConstraints maxHeight="Infinity" minHeight="30" prefHeight="30" />
+                                    <RowConstraints maxHeight="Infinity" minHeight="60" prefHeight="30" />
+                                </rowConstraints>
+                                <children>
+                                    <ComboBox fx:id="mabComBoxT" prefHeight="28.0" prefWidth="211.0" promptText="Material">
+                                        <items>
+                                            <FXCollections fx:factory="observableArrayList">
+                                                <String fx:value="Otel" />
+                                                <String fx:value="Inox" />
+                                            </FXCollections>
+                                        </items>
+                                    </ComboBox>
+                                    <Label text="Lungime:" GridPane.rowIndex="1" />
+                                    <TextField fx:id="lungimeT" prefHeight="25.0" prefWidth="82.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <Label text="mm" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                    <Label text="Latime:" GridPane.rowIndex="2" />
+                                    <Label text="mm" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                    <TextField fx:id="latimeT" prefHeight="25.0" prefWidth="82.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Label prefHeight="18.0" prefWidth="80.0" text="Grosime:" GridPane.rowIndex="3" />
+                                    <TextField fx:id="grosimeT" prefHeight="25.0" prefWidth="82.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <Label text="mm" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                    <Label prefHeight="18.0" prefWidth="80.0" text="Pret/Kg:" GridPane.rowIndex="4" />
+                                    <TextField fx:id="pretKgT" prefHeight="25.0" prefWidth="82.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <Label text="lei/kg" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                  <Button fx:id="CalculeazaT" mnemonicParsing="false" onAction="#CalculeazaT" prefHeight="31.0" prefWidth="125.0" text="Calculeaza" GridPane.rowIndex="5" />
+                                  <Button fx:id="AdaugaT" mnemonicParsing="false" onAction="#AdaugaT" prefHeight="31.0" prefWidth="169.0" text="Adaugă la necesar" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label fx:id="rezultateT" prefHeight="200.0" prefWidth="200.0" wrapText="true" GridPane.rowIndex="6" />
+                                </children>
+                            </GridPane>
+                        </children>
+                    </AnchorPane>
+                </content>
+            </TitledPane>
+<TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" text="Profile">
+  <content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+         <children>
+            <TabPane  layoutX="29.0" layoutY="8.0" prefHeight="450.0" prefWidth="598.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <tabs>
+                <Tab fx:id="trPane" text="Teava Rectangulara" >
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <GridPane layoutX="16.0" layoutY="16.0" prefWidth="443.0" vgap="8.0">
+                                  <columnConstraints>
+                                      <ColumnConstraints percentWidth="50.0" />
+                                      <ColumnConstraints percentWidth="50.0" />
+                                          <ColumnConstraints />
+                                  </columnConstraints>
+                                  <rowConstraints>
+                                      <RowConstraints maxHeight="Infinity" minHeight="30.0" prefHeight="30.0" />
+                                      <RowConstraints maxHeight="Infinity" minHeight="30.0" prefHeight="30.0" />
+                                      <RowConstraints maxHeight="Infinity" minHeight="30.0" prefHeight="30.0" />
+                                      <RowConstraints maxHeight="Infinity" minHeight="30.0" prefHeight="30.0" />
+                                      <RowConstraints maxHeight="Infinity" minHeight="30.0" prefHeight="30.0" />
+                                      <RowConstraints maxHeight="Infinity" minHeight="30.0" prefHeight="30.0" />
+                                      <RowConstraints maxHeight="Infinity" minHeight="60.0" prefHeight="30.0" />
+                                          <RowConstraints />
+                                  </rowConstraints>
+                                 <children>
+                                    <ComboBox fx:id="matComBoxTR" prefHeight="28.0" prefWidth="211.0" promptText="Material">
+                                       <items>
+                                          <FXCollections fx:factory="observableArrayList">
+                                             <String fx:value="Otel" />
+                                             <String fx:value="Inox" />
+                                          </FXCollections>
+                                       </items>
+                                    </ComboBox>
+                                    <Label text="Lungime:" GridPane.rowIndex="1" />
+                                    <TextField fx:id="lungimeTxtTR" prefHeight="25.0" prefWidth="82.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <Label text="mm" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                    <Label text="Latura 1: " GridPane.rowIndex="2" />
+                                    <Label text="mm" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                    <TextField fx:id="latura1Txt" prefHeight="25.0" prefWidth="82.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Label prefHeight="18.0" prefWidth="80.0" text="Grosime:" GridPane.rowIndex="4" />
+                                    <TextField fx:id="grosimeTxtTR" prefHeight="25.0" prefWidth="82.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <Label text="mm" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                    <Label prefHeight="18.0" prefWidth="80.0" text="Pret/ML:" GridPane.rowIndex="5" />
+                                    <TextField fx:id="pretMLTR" prefHeight="25.0" prefWidth="82.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                    <Label text="mm" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                                    <Label text="Latura 2: " GridPane.rowIndex="3" />
+                                    <TextField fx:id="latura2Txt" prefHeight="25.0" prefWidth="82.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <Label text="mm" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                    <Button fx:id="CalculeazaTR" mnemonicParsing="false" onAction="#CalculeazaTR" prefHeight="31.0" prefWidth="125.0" text="Calculeaza" GridPane.rowIndex="6" />
+                                    <Button fx:id="AdaugaTR" mnemonicParsing="false" onAction="#AdaugaTR" prefHeight="31.0" prefWidth="169.0" text="Adaugă la necesar" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                          <Label fx:id="rezultateTR" prefHeight="100.0" prefWidth="217.0" wrapText="true" GridPane.rowIndex="7" GridPane.valignment="TOP" />
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab fx:id="tpPane" text="Teava Patrata">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <GridPane layoutX="16.0" layoutY="16.0" prefHeight="400.0" prefWidth="443.0" vgap="8.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="164.6666259765625" minWidth="10.0" prefWidth="139.33329264322916" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="186.66674804687497" minWidth="10.0" prefWidth="168.66674804687503" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="155.6666259765625" minWidth="10.0" prefWidth="131.333251953125" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <ComboBox fx:id="matComBoxTP" prefHeight="28.0" prefWidth="211.0" promptText="Material">
+                                       <items>
+                                          <FXCollections fx:factory="observableArrayList">
+                                             <String fx:value="Otel" />
+                                             <String fx:value="Inox" />
+                                          </FXCollections>
+                                       </items>
+                                    </ComboBox>
+                                    <Label text="Lungime:" GridPane.rowIndex="1" />
+                                    <TextField fx:id="lungimeTxtTP" prefHeight="25.0" prefWidth="82.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <Label text="mm" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                    <Label text="Latura: " GridPane.rowIndex="2" />
+                                    <Label text="mm" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                    <TextField fx:id="laturaTxtTP" prefHeight="25.0" prefWidth="82.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Label prefHeight="18.0" prefWidth="80.0" text="Grosime:" GridPane.rowIndex="3" />
+                                    <TextField fx:id="grosimeTxtTP" prefHeight="25.0" prefWidth="82.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <Label text="mm" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                    <Label prefHeight="18.0" prefWidth="80.0" text="Pret/ML:" GridPane.rowIndex="4" />
+                                    <TextField fx:id="pretMLTP" prefHeight="25.0" prefWidth="82.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <Label text="mm" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                    <Button fx:id="CalculeazaTP" mnemonicParsing="false" onAction="#CalculeazaTP" prefHeight="31.0" prefWidth="125.0" text="Calculeaza" GridPane.rowIndex="5" />
+                                    <Button fx:id="AdaugaTP" mnemonicParsing="false" onAction="#AdaugaTP" prefHeight="31.0" prefWidth="169.0" text="Adaugă la necesar" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                          <Label fx:id="rezultateTP" prefHeight="144.0" prefWidth="143.0" wrapText="true" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS" />
+                                 </children>
+                              </GridPane>
+                           </children>
+                           </AnchorPane>
+                  </content>
+                </Tab>
+                  <Tab fx:id="pPane" text="Platbanda">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <GridPane layoutX="16.0" layoutY="16.0" prefHeight="400.0" prefWidth="443.0" vgap="8.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="164.6666259765625" minWidth="10.0" prefWidth="139.33329264322916" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="186.66674804687497" minWidth="10.0" prefWidth="168.66674804687503" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="155.6666259765625" minWidth="10.0" prefWidth="131.333251953125" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <ComboBox fx:id="matComBoxP" prefHeight="28.0" prefWidth="211.0" promptText="Material">
+                                       <items>
+                                          <FXCollections fx:factory="observableArrayList">
+                                             <String fx:value="Otel" />
+                                             <String fx:value="Inox" />
+                                          </FXCollections>
+                                       </items>
+                                    </ComboBox>
+                                    <Label text="Lungime:" GridPane.rowIndex="1" />
+                                    <TextField fx:id="lungimeTxtP" prefHeight="25.0" prefWidth="82.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <Label text="mm" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                    <Label text="Latura: " GridPane.rowIndex="2" />
+                                    <Label text="mm" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                    <TextField fx:id="laturaTxtP" prefHeight="25.0" prefWidth="82.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Label prefHeight="18.0" prefWidth="80.0" text="Grosime:" GridPane.rowIndex="3" />
+                                    <TextField fx:id="grosimeTxtP" prefHeight="25.0" prefWidth="82.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <Label text="mm" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                    <Label prefHeight="18.0" prefWidth="80.0" text="Pret/ML:" GridPane.rowIndex="4" />
+                                    <TextField fx:id="pretMLP" prefHeight="25.0" prefWidth="82.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <Label text="mm" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                    <Button fx:id="CalculeazaP" mnemonicParsing="false" onAction="#CalculeazaPB" prefHeight="31.0" prefWidth="125.0" text="Calculeaza" GridPane.rowIndex="5" />
+                                    <Button fx:id="AdaugaP" mnemonicParsing="false" onAction="#AdaugaPB" prefHeight="31.0" prefWidth="169.0" text="Adaugă la necesar" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                          <Label fx:id="rezultateP" prefHeight="200.0" prefWidth="141.0" wrapText="true" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS" />
+                                 </children>
+                              </GridPane>
+                           </children>
+                           </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab fx:id="TPane" text="Teava Rotunda">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <GridPane layoutX="16.0" layoutY="16.0" prefHeight="400.0" prefWidth="443.0" vgap="8.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="164.6666259765625" minWidth="10.0" prefWidth="139.33329264322916" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="186.66674804687497" minWidth="10.0" prefWidth="168.66674804687503" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="155.6666259765625" minWidth="10.0" prefWidth="131.333251953125" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <ComboBox fx:id="matComBoxFi" prefHeight="28.0" prefWidth="211.0" promptText="Material">
+                                       <items>
+                                          <FXCollections fx:factory="observableArrayList">
+                                             <String fx:value="Otel" />
+                                             <String fx:value="Inox" />
+                                          </FXCollections>
+                                       </items>
+                                    </ComboBox>
+                                    <Label text="Lungime:" GridPane.rowIndex="1" />
+                                    <TextField fx:id="lungimeTxtFi" prefHeight="25.0" prefWidth="82.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <Label text="mm" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                    <Label text="Diametru: " GridPane.rowIndex="2" />
+                                    <Label text="mm" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                    <TextField fx:id="diametruTxtFi" prefHeight="25.0" prefWidth="82.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Label prefHeight="18.0" prefWidth="80.0" text="Grosime:" GridPane.rowIndex="3" />
+                                    <TextField fx:id="grosimieTxtFi" prefHeight="25.0" prefWidth="82.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <Label text="mm" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                    <Label prefHeight="18.0" prefWidth="80.0" text="Pret/ML:" GridPane.rowIndex="4" />
+                                    <TextField fx:id="pretMlFi" prefHeight="25.0" prefWidth="82.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <Label text="mm" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                    <Button fx:id="CalculeazaFi" mnemonicParsing="false" onAction="#CalculeazaFi" prefHeight="31.0" prefWidth="125.0" text="Calculeaza" GridPane.rowIndex="5" />
+                                    <Button fx:id="AdaugaFi" mnemonicParsing="false" onAction="#AdaugaFi" prefHeight="31.0" prefWidth="169.0" text="Adaugă la necesar" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                             <GridPane.margin>
+                                                <Insets />
+                                             </GridPane.margin>
+                                          </Button>
+                                          <Label fx:id="rezultateFi" prefHeight="200.0" prefWidth="200.0" wrapText="true" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS" />
+                                 </children>
+                              </GridPane>
+                           </children>
+                           </AnchorPane>
+                     </content>
+                  </Tab>
+              </tabs>
+            </TabPane>
+         </children>
+         </AnchorPane>
+  </content>
+
+</TitledPane>
+</VBox>
+   <Pane prefHeight="752.0" prefWidth="400.0">
+      <children>
+         <FlowPane layoutX="40.0" layoutY="41.0" prefHeight="200.0" prefWidth="200.0">
+            <children>
+               <Label text="Necesar Materiale" />
+                <VBox alignment="TOP_LEFT" spacing="10">
+                    <Label fx:id="necesarLabel" style="-fx-font-size: 14px; -fx-font-family: 'Segoe UI';" wrapText="true" />
+                    <Label fx:id="totalPreturiLabel" style="-fx-font-size: 14px; -fx-font-family: 'Segoe UI';" text="Total preturi: 0 lei" wrapText="true" />
+                </VBox>
+            </children>
+         </FlowPane>
+      </children>
+   </Pane>
+</HBox>
