@@ -1,6 +1,6 @@
 package Materiale;
 
-import com.example.proiect2.Material;
+
 
 import java.util.ArrayList;
 

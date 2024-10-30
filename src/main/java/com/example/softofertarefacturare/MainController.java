@@ -1,11 +1,7 @@
 package com.example.softofertarefacturare;
 
-import com.example.proiect2.Necesar.Necesar;
-import com.example.proiect2.Profile.Platbanda.Platbanda;
-import com.example.proiect2.Profile.TeavaPatrata.TeavaPatrata;
-import com.example.proiect2.Profile.TeavaRectangulara.TeavaRectangulara;
-import com.example.proiect2.Profile.TeavaRotunda.TeavaRotunda;
-import com.example.proiect2.Tabla.Tabla;
+
+import Materiale.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;

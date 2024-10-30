@@ -9,7 +9,7 @@
 
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.proiect2.Main.LoginController" spacing="10" alignment="CENTER" minHeight="300" minWidth="300">
+      fx:controller="com.example.softofertarefacturare.LoginController" spacing="10" alignment="CENTER" minHeight="300" minWidth="300">
     <children>
         <Label text="Username:"/>
         <TextField fx:id="usernameField"/>

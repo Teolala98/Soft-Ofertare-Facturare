@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proiect2.Main.MainController">
+<HBox xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.softofertarefacturare.MainController">
         <VBox>
             <TitledPane animated="false" prefHeight="450.0" prefWidth="500.0" text="Tabla" >
                 <content>

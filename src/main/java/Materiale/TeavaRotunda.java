@@ -1,8 +1,6 @@
 package Materiale;
 
-import com.example.proiect2.CalculMaterial;
-import com.example.proiect2.DensitateMateriale;
-import com.example.proiect2.Material;
+
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 

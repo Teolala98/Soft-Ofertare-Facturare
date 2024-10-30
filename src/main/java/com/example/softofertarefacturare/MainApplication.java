@@ -12,7 +12,7 @@ public class MainApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/com/example/View/logIn.fxml"));
+        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/com/example/softofertarefacturare/logIn.fxml"));
         Parent loginRoot = loginLoader.load();
         Scene loginScene = new Scene(loginRoot);
 
@@ -30,7 +30,7 @@ public class MainApplication extends Application {
             public void run() {
                 loginStage.close();
                 try {
-                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/View/profile-view.fxml"));
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/softofertarefacturare/profile-view.fxml"));
                     Parent root = fxmlLoader.load();
 
                     Scene mainScene = new Scene(root, 900, 1000);
