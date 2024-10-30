@@ -1,9 +1,9 @@
 package com.example.softofertarefacturare;
 
+import Job.Comanda;
 import Procese.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -17,9 +17,10 @@ public class HelloController {
     private CheckBox DebitareGhilotinaCheckBox;
     @FXML
     private CheckBox GaurireCheckBox;
-
-    @FXML private CheckBox SuduraCheckBox;
-
+    @FXML
+    private CheckBox SuduraCheckBox;
+    @FXML
+    private CheckBox PolizareCheckBox;
     @FXML
     private TableView<TableViewItem> tableView;
     @FXML
@@ -30,8 +31,26 @@ public class HelloController {
     private TableColumn<TableViewItem, TextField> Cantitate;
     @FXML
     private TableColumn<TableViewItem, Label> Pret;
+    @FXML
+    private TextField denumireProdusField;
+    @FXML
+    private TextField profitField;
+    @FXML
+    private Label totalCuTvaField;
+    @FXML
+    private Label totalFaraTvaField;
+
+    @FXML
+    private TableView<Comanda> comandaTableView;
+    @FXML
+    private TableColumn<Comanda, String> ProdusDenumire;
+    @FXML
+    private TableColumn<Comanda, Integer> ProdusCantitate;
+    @FXML
+    private TableColumn<Comanda, Double> ProdusPret;
 
     private final ObservableList<TableViewItem> tableItems = FXCollections.observableArrayList();
+    private final ObservableList<Comanda> comenzi = FXCollections.observableArrayList();
 
     public void initialize() {
         Denumire.setCellValueFactory(new PropertyValueFactory<>("denumireLabel"));
@@ -40,7 +59,15 @@ public class HelloController {
         Pret.setCellValueFactory(new PropertyValueFactory<>("pretLabel"));
         tableView.setItems(tableItems);
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+        ProdusDenumire.setCellValueFactory(new PropertyValueFactory<>("denumireProdus"));
+        ProdusCantitate.setCellValueFactory(new PropertyValueFactory<>("cantitate"));
+        ProdusPret.setCellValueFactory(new PropertyValueFactory<>("pretTotal"));
+        comandaTableView.setItems(comenzi);
     }
+
+
+
 
     @FXML
     public void AbkantSelected() {
@@ -159,40 +186,138 @@ public class HelloController {
     }
 
 
-        @FXML
-        public void SuduraSelected() {
-            if (SuduraCheckBox.isSelected()) {
-                double cmSudura = 0.0;
+    @FXML
+    public void SuduraSelected() {
+        if (SuduraCheckBox.isSelected()) {
+            double cmSudura = 0.0;
 
-                Sudura sudura = new Sudura();
+            Sudura sudura = new Sudura();
 
-                double pret = 0.0;
-                TableViewItem item = new TableViewItem(sudura.getDenumireProces(), sudura.getUnitateDeMasura(), cmSudura, pret);
-                tableItems.add(item);
+            double pret = 0.0;
+            TableViewItem item = new TableViewItem(sudura.getDenumireProces(), sudura.getUnitateDeMasura(), cmSudura, pret);
+            tableItems.add(item);
 
-                item.getCantitateTextField().textProperty().addListener((observable, oldValue, newValue) -> {
-                    double newCmSudura;
-                    try {
-                        newCmSudura = Double.parseDouble(newValue);
-                    } catch (NumberFormatException e) {
-                        item.getPretLabel().setText("Invalid");
-                        return;
-                    }
-                    sudura.setCmSudura(newCmSudura);
-                    item.getPretLabel().setText(String.format("%.2f", sudura.calculPretProces()));
-                    tableView.refresh();
-                });
+            item.getCantitateTextField().textProperty().addListener((observable, oldValue, newValue) -> {
+                double newCmSudura;
+                try {
+                    newCmSudura = Double.parseDouble(newValue);
+                } catch (NumberFormatException e) {
+                    item.getPretLabel().setText("Invalid");
+                    return;
+                }
+                sudura.setCmSudura(newCmSudura);
+                item.getPretLabel().setText(String.format("%.2f", sudura.calculPretProces()));
+                tableView.refresh();
+            });
 
-                SuduraCheckBox.setSelected(false);
-            }
+            SuduraCheckBox.setSelected(false);
         }
+    }
+
     @FXML
     public void deleteSelectedItem() {
         TableViewItem selectedItem = tableView.getSelectionModel().getSelectedItem();
-        if(selectedItem!= null){
+        if (selectedItem != null) {
             tableItems.remove(selectedItem);
         }
     }
+
+    @FXML
+    public void PolizareSelected() {
+        if (PolizareCheckBox.isSelected()) {
+            double minutePrelucrare = 0.0;
+
+            Polizare polizare = new Polizare();
+
+            double pret = 0.0;
+            TableViewItem item = new TableViewItem(polizare.getDenumireProces(), polizare.getUnitateDeMasura(), minutePrelucrare, pret);
+            tableItems.add(item);
+
+            item.getCantitateTextField().textProperty().addListener((observable, oldValue, newValue) -> {
+                double newMinutePrelucrare;
+                try {
+                    newMinutePrelucrare = Double.parseDouble(newValue);
+                } catch (NumberFormatException e) {
+                    item.getPretLabel().setText("Invalid");
+                    return;
+                }
+                polizare.setMinutePrelucrare(newMinutePrelucrare);
+                item.getPretLabel().setText(String.format("%.2f", polizare.calculPretProces()));
+                tableView.refresh();
+            });
+
+            // Resetare câmpuri după adăugare
+            PolizareCheckBox.setSelected(false);
+        }
+    }
+
+
+    @FXML
+    public void adaugaProdusInComanda() {
+        String denumireProdus = denumireProdusField.getText();
+        double pretFaraTva = calculateTotalFaraTva();
+        double profit = profitField.getText().isEmpty() ? 0 : Double.parseDouble(profitField.getText());
+        double pretTotalFaraTva = pretFaraTva + (pretFaraTva * (profit / 100));
+        double pretTotalCuTva = pretTotalFaraTva * 1.19;
+        int cantitate = 1; // Poate fi modificat ulterior de utilizator
+
+        Comanda produs = new Comanda(denumireProdus, pretTotalFaraTva, pretTotalCuTva, profit);
+        produs.setCantitate(cantitate);
+        comenzi.add(produs);
+
+        // Actualizare etichete totaluri
+        totalFaraTvaField.setText(String.format("%.2f", pretTotalFaraTva));
+        totalCuTvaField.setText(String.format("%.2f", pretTotalCuTva));
+
+        denumireProdusField.clear();
+        tableItems.clear();
+    }
+
+    @FXML
+    public void editareProdus() {
+        Comanda selectedProdus = comandaTableView.getSelectionModel().getSelectedItem();
+        if (selectedProdus != null) {
+            denumireProdusField.setText(selectedProdus.getDenumireProdus());
+            profitField.setText(Double.toString(selectedProdus.getProfit()));
+
+            tableItems.clear();
+            tableItems.addAll(selectedProdus.getTableItems());
+        }
+    }
+
+    @FXML
+    public void stergeProdus() {
+        Comanda selectedProdus = comandaTableView.getSelectionModel().getSelectedItem();
+        if (selectedProdus != null) {
+            comandaTableView.getItems().remove(selectedProdus);
+        }
+    }
+
+    private double calculateTotalFaraTva() {
+        double total = 0.0;
+        for (TableViewItem item : tableItems) {
+            total += Double.parseDouble(item.getPretLabel().getText());
+        }
+        return total;
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
