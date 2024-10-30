@@ -45,11 +45,4 @@ public class IndoitTabla extends AtributeProces implements Proces {
         return calculPretCurent() + calculPretChirie() + calculPretAmortizare() + calculPretMinut();
     }
 
-    private void showAlert(String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Eroare");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
 }

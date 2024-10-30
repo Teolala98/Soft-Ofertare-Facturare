@@ -64,7 +64,7 @@
                         <CheckBox fx:id="LaserCheckBox" mnemonicParsing="false"  text="Debitare Laser CNC" GridPane.rowIndex="1" />
                         <CheckBox fx:id="GhilotinaCheckBox" mnemonicParsing="false"  text="Debitare Ghilotina CNC" GridPane.columnIndex="3" />
                         <CheckBox fx:id="SuduraCheckBox" mnemonicParsing="false"  text="Sudura MIG-MAG" GridPane.columnIndex="1" />
-                        <CheckBox fx:id="FierastrauCheckBox" mnemonicParsing="false"  text="Debitare Fierastra" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <CheckBox fx:id="DebitareFierastrauCheckBox" mnemonicParsing="false"  onAction="#DebitareFierastrauSelected" text="Debitare Fierastra" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <CheckBox fx:id="GaurireCheckBox" mnemonicParsing="false"  text="Gaurire" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                         <CheckBox fx:id="PolizareCheckBox" mnemonicParsing="false"  text="Polizare" GridPane.columnIndex="2" />
                         <CheckBox fx:id="VopsitCheckBox" mnemonicParsing="false"  text="Vopsit" GridPane.columnIndex="2" GridPane.rowIndex="1" />

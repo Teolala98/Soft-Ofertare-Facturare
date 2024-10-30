@@ -1,6 +1,7 @@
 package com.example.softofertarefacturare;
 
 import Procese.IndoitTabla;
+import Procese.DebitareFierastrau;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,6 +12,8 @@ public class HelloController {
     @FXML
     private CheckBox AbkantCheckBox;
     @FXML
+    private CheckBox DebitareFierastrauCheckBox; // CheckBox pentru Debitare Fierăstrău
+    @FXML
     private TableView<TableViewItem> tableView;
     @FXML
     private TableColumn<TableViewItem, Label> Denumire;
@@ -20,8 +23,6 @@ public class HelloController {
     private TableColumn<TableViewItem, TextField> Cantitate;
     @FXML
     private TableColumn<TableViewItem, Label> Pret;
-    @FXML
-    private TextField DenumireProdus;
 
     private final ObservableList<TableViewItem> tableItems = FXCollections.observableArrayList();
 
@@ -36,11 +37,9 @@ public class HelloController {
     @FXML
     public void AbkantSelected() {
         if (AbkantCheckBox.isSelected()) {
-            String denumire = DenumireProdus.getText();
             double cantitate = 0.0;
 
             IndoitTabla indoitTabla = new IndoitTabla();
-            indoitTabla.setDenumireProces(denumire);
 
             double pret = 0.0;
             TableViewItem item = new TableViewItem(indoitTabla.getDenumireProces(), indoitTabla.getUnitateDeMasura(), cantitate, pret);
@@ -60,8 +59,37 @@ public class HelloController {
             });
 
             // Resetare câmpuri după adăugare
-            DenumireProdus.clear();
             AbkantCheckBox.setSelected(false);
+        }
+    }
+
+    @FXML
+    public void DebitareFierastrauSelected() {
+        if (DebitareFierastrauCheckBox.isSelected()) {
+            double cantitate = 0.0;
+
+            DebitareFierastrau debitareFierastrau = new DebitareFierastrau();
+            debitareFierastrau.setPretBandaMin(0.15);
+
+            double pret = 0.0;
+            TableViewItem item = new TableViewItem(debitareFierastrau.getDenumireProces(), debitareFierastrau.getUnitateDeMasura(), cantitate, pret);
+            tableItems.add(item);
+
+            item.getCantitateTextField().textProperty().addListener((observable, oldValue, newValue) -> {
+                double newCantitate;
+                try {
+                    newCantitate = Double.parseDouble(newValue);
+                } catch (NumberFormatException e) {
+                    item.getPretLabel().setText("Invalid");
+                    return;
+                }
+                debitareFierastrau.setMinutePrelucrare(newCantitate);
+                item.getPretLabel().setText(String.format("%.2f", debitareFierastrau.calculPretProces()));
+                tableView.refresh();
+            });
+
+            // Resetare câmpuri după adăugare
+            DebitareFierastrauCheckBox.setSelected(false);
         }
     }
 }
