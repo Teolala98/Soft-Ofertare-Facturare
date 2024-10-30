@@ -11,6 +11,10 @@ module com.example.softofertarefacturare {
     requires eu.hansolo.tilesfx;
     requires java.desktop;
 
+    requires io;
+    requires kernel;
+    requires layout;
+
     opens com.example.softofertarefacturare to javafx.fxml;
     exports com.example.softofertarefacturare;
 }
