@@ -40,12 +40,15 @@ public class DebitareFierastrau extends AtributeProces implements Proces {
 
     @Override
     public double calculPretMinut() {
-        return calculPretAmortizare() + calculPretChirie() + calculPretCurent() + calculPretBandaMin();
+        return costMinut*minutePrelucrare;
     }
 
+    public double consumabileFierastrau(){
+        return pretBandaMin*minutePrelucrare;
+    }
     @Override
     public double calculPretProces() {
-        return calculPretCurent() + calculPretChirie() + calculPretAmortizare() + calculPretMinut();
+        return calculPretCurent() + calculPretChirie() + calculPretAmortizare() + calculPretMinut()+consumabileFierastrau();
     }
 
 

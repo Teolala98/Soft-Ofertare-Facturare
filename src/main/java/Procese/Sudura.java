@@ -1,35 +1,56 @@
-//package Procese;
-//
-//public class Sudura extends AtributeProces implements Proces{
-//    private String cmSudura;
-//    private static final Double pretCurentMin = 0.014;
-//    private static final Double pretAmortizareMin = 0.009925;
-//    private static final Double pretSarma=90.00;
-//    private static final Double pretGaz=250.00;
-//
-//    public Sudura(String cmSudura,String tipMaterial, Double minutePrelucrare, Double costMinut, Double minuteProiectare, Double amortizare, Double chirie, Double marjaCompanie, Double curent) {
-//        super(tipMaterial, minutePrelucrare, costMinut, minuteProiectare, amortizare, chirie, marjaCompanie, curent);
-//        this.cmSudura=cmSudura;
-//    }
-//
-//
-//    @Override
-//    public double calculPretAmortizare() {
-//        return Proces.super.calculPretAmortizare();
-//    }
-//
-//    @Override
-//    public double calculPretChirie() {
-//        return Proces.super.calculPretChirie();
-//    }
-//
-//    @Override
-//    public double calculPretCurent() {
-//        return Proces.super.calculPretCurent();
-//    }
-//
-//    @Override
-//    public double calculPretMinut() {
-//        return Proces.super.calculPretMinut();
-//    }
-//}
+
+
+package Procese;
+
+    public class Sudura extends AtributeProces implements Proces {
+
+
+        private double pretcmSudura;
+        private double cmSudura;
+
+        public Sudura() {
+            super("cm", "Sudura MIG-MAG", 0.0, 0.63, 0.009925, 0.3, 0.014);
+            this.pretcmSudura=0.10325;
+            this.cmSudura = 0.0;
+        }
+
+        public void setCmSudura(double cmSudura) {
+            this.cmSudura = cmSudura;
+        }
+
+
+       public double calculMinutePrelucrare(){
+            return cmSudura/4;
+       }
+
+
+        @Override
+        public double calculPretAmortizare() {
+            return calculMinutePrelucrare() * amortizare;
+        }
+
+        @Override
+        public double calculPretChirie() {
+            return chirie * calculMinutePrelucrare();
+        }
+
+        @Override
+        public double calculPretCurent() {
+            return curent * calculMinutePrelucrare();
+        }
+
+
+        @Override
+        public double calculPretMinut() {
+            return calculMinutePrelucrare()*costMinut;
+        }
+
+        public double calculConsumabile(){
+            return pretcmSudura*cmSudura;
+        }
+
+        @Override
+        public double calculPretProces() {
+            return calculPretCurent() + calculPretChirie() + calculPretAmortizare() + calculPretMinut()+calculConsumabile();
+        }
+    }
