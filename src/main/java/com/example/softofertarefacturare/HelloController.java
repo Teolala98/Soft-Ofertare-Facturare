@@ -1,51 +1,303 @@
-package Job;
+package com.example.softofertarefacturare;
 
+import Job.Comanda;
+import Procese.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import Procese.AtributeProces;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 
-public class Comenzi {
-    private String denumireProdus;
-    private int cantitate;
-    private double pretFaraTva;
-    private double pretCuTva;
-    private double profit;
-    private ObservableList<AtributeProces> procese;
+public class HelloController {
+    @FXML
+    private CheckBox AbkantCheckBox;
+    @FXML
+    private CheckBox DebitareFierastrauCheckBox;
+    @FXML
+    private CheckBox DebitareGhilotinaCheckBox;
+    @FXML
+    private CheckBox GaurireCheckBox;
+    @FXML
+    private CheckBox SuduraCheckBox;
+    @FXML
+    private CheckBox PolizareCheckBox;
+    @FXML
+    private TableView<TableViewItem> tableView;
+    @FXML
+    private TableColumn<TableViewItem, Label> Denumire;
+    @FXML
+    private TableColumn<TableViewItem, Label> UnitateMasura;
+    @FXML
+    private TableColumn<TableViewItem, TextField> Cantitate;
+    @FXML
+    private TableColumn<TableViewItem, Label> Pret;
+    @FXML
+    private TextField denumireProdusField;
+    @FXML
+    private TextField profitField;
+    @FXML
+    private Label totalCuTvaField;
+    @FXML
+    private Label totalFaraTvaField;
 
-    public Comenzi(String denumireProdus, int cantitate, double pretFaraTva, double profit) {
-        this.denumireProdus = denumireProdus;
-        this.cantitate = cantitate;
-        this.pretFaraTva = pretFaraTva;
-        this.pretCuTva = pretFaraTva * 1.19;
-        this.profit = profit;
-        this.procese = FXCollections.observableArrayList();
+    @FXML
+    private TableView<Comanda> comandaTableView;
+    @FXML
+    private TableColumn<Comanda, String> ProdusDenumire;
+    @FXML
+    private TableColumn<Comanda, Integer> ProdusCantitate;
+    @FXML
+    private TableColumn<Comanda, Double> ProdusPret;
+
+    private final ObservableList<TableViewItem> tableItems = FXCollections.observableArrayList();
+    private final ObservableList<Comanda> comenzi = FXCollections.observableArrayList();
+
+    public void initialize() {
+        Denumire.setCellValueFactory(new PropertyValueFactory<>("denumireLabel"));
+        UnitateMasura.setCellValueFactory(new PropertyValueFactory<>("unitateDeMasuraLabel"));
+        Cantitate.setCellValueFactory(new PropertyValueFactory<>("cantitateTextField"));
+        Pret.setCellValueFactory(new PropertyValueFactory<>("pretLabel"));
+        tableView.setItems(tableItems);
+        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+        ProdusDenumire.setCellValueFactory(new PropertyValueFactory<>("denumireProdus"));
+        ProdusCantitate.setCellValueFactory(new PropertyValueFactory<>("cantitate"));
+        ProdusPret.setCellValueFactory(new PropertyValueFactory<>("pretTotal"));
+        comandaTableView.setItems(comenzi);
     }
 
-    public void adaugaProces(AtributeProces proces) {
-        this.procese.add(proces);
+
+
+
+    @FXML
+    public void AbkantSelected() {
+        if (AbkantCheckBox.isSelected()) {
+            double cantitate = 0.0;
+
+            IndoitTabla indoitTabla = new IndoitTabla();
+
+            double pret = 0.0;
+            TableViewItem item = new TableViewItem(indoitTabla.getDenumireProces(), indoitTabla.getUnitateDeMasura(), cantitate, pret);
+            tableItems.add(item);
+
+            item.getCantitateTextField().textProperty().addListener((observable, oldValue, newValue) -> {
+                double newCantitate;
+                try {
+                    newCantitate = Double.parseDouble(newValue);
+                } catch (NumberFormatException e) {
+                    item.getPretLabel().setText("Invalid");
+                    return;
+                }
+                indoitTabla.setMinutePrelucrare(newCantitate);
+                item.getPretLabel().setText(String.format("%.2f", indoitTabla.calculPretProces()));
+                tableView.refresh();
+            });
+
+
+            AbkantCheckBox.setSelected(false);
+        }
     }
 
-    public String getDenumireProdus() {
-        return denumireProdus;
+    @FXML
+    public void DebitareFierastrauSelected() {
+        if (DebitareFierastrauCheckBox.isSelected()) {
+            double cantitate = 0.0;
+
+            DebitareFierastrau debitareFierastrau = new DebitareFierastrau();
+
+            double pret = 0.0;
+            TableViewItem item = new TableViewItem(debitareFierastrau.getDenumireProces(), debitareFierastrau.getUnitateDeMasura(), cantitate, pret);
+            tableItems.add(item);
+
+            item.getCantitateTextField().textProperty().addListener((observable, oldValue, newValue) -> {
+                double newCantitate;
+                try {
+                    newCantitate = Double.parseDouble(newValue);
+                } catch (NumberFormatException e) {
+                    item.getPretLabel().setText("Invalid");
+                    return;
+                }
+                debitareFierastrau.setMinutePrelucrare(newCantitate);
+                item.getPretLabel().setText(String.format("%.2f", debitareFierastrau.calculPretProces()));
+                tableView.refresh();
+            });
+
+
+            DebitareFierastrauCheckBox.setSelected(false);
+        }
     }
 
-    public int getCantitate() {
-        return cantitate;
+    @FXML
+    public void DebitareGhilotinaSelected() {
+        if (DebitareGhilotinaCheckBox.isSelected()) {
+            double cantitate = 0.0;
+
+            DebitareGhilotina debitareGhilotina = new DebitareGhilotina();
+
+            double pret = 0.0;
+            TableViewItem item = new TableViewItem(debitareGhilotina.getDenumireProces(), debitareGhilotina.getUnitateDeMasura(), cantitate, pret);
+            tableItems.add(item);
+
+            item.getCantitateTextField().textProperty().addListener((observable, oldValue, newValue) -> {
+                double newCantitate;
+                try {
+                    newCantitate = Double.parseDouble(newValue);
+                } catch (NumberFormatException e) {
+                    item.getPretLabel().setText("Invalid");
+                    return;
+                }
+                debitareGhilotina.setMinutePrelucrare(newCantitate);
+                item.getPretLabel().setText(String.format("%.2f", debitareGhilotina.calculPretProces()));
+                tableView.refresh();
+            });
+
+
+            DebitareGhilotinaCheckBox.setSelected(false);
+        }
     }
 
-    public double getPretFaraTva() {
-        return pretFaraTva;
+    @FXML
+    public void GaurireSelected() {
+        if (GaurireCheckBox.isSelected()) {
+            double cantitate = 0.0;
+
+            Gaurire gaurire = new Gaurire();
+
+            double pret = 0.0;
+            TableViewItem item = new TableViewItem(gaurire.getDenumireProces(), gaurire.getUnitateDeMasura(), cantitate, pret);
+            tableItems.add(item);
+
+            item.getCantitateTextField().textProperty().addListener((observable, oldValue, newValue) -> {
+                double newCantitate;
+                try {
+                    newCantitate = Double.parseDouble(newValue);
+                } catch (NumberFormatException e) {
+                    item.getPretLabel().setText("Invalid");
+                    return;
+                }
+                gaurire.setMinutePrelucrare(newCantitate);
+                item.getPretLabel().setText(String.format("%.2f", gaurire.calculPretProces()));
+                tableView.refresh();
+            });
+
+
+            GaurireCheckBox.setSelected(false);
+        }
     }
 
-    public double getPretCuTva() {
-        return pretCuTva;
+
+    @FXML
+    public void SuduraSelected() {
+        if (SuduraCheckBox.isSelected()) {
+            double cmSudura = 0.0;
+
+            Sudura sudura = new Sudura();
+
+            double pret = 0.0;
+            TableViewItem item = new TableViewItem(sudura.getDenumireProces(), sudura.getUnitateDeMasura(), cmSudura, pret);
+            tableItems.add(item);
+
+            item.getCantitateTextField().textProperty().addListener((observable, oldValue, newValue) -> {
+                double newCmSudura;
+                try {
+                    newCmSudura = Double.parseDouble(newValue);
+                } catch (NumberFormatException e) {
+                    item.getPretLabel().setText("Invalid");
+                    return;
+                }
+                sudura.setCmSudura(newCmSudura);
+                item.getPretLabel().setText(String.format("%.2f", sudura.calculPretProces()));
+                tableView.refresh();
+            });
+
+            SuduraCheckBox.setSelected(false);
+        }
     }
 
-    public double getProfit() {
-        return profit;
+    @FXML
+    public void deleteSelectedItem() {
+        TableViewItem selectedItem = tableView.getSelectionModel().getSelectedItem();
+        if (selectedItem != null) {
+            tableItems.remove(selectedItem);
+        }
     }
 
-    public ObservableList<AtributeProces> getProcese() {
-        return procese;
+    @FXML
+    public void PolizareSelected() {
+        if (PolizareCheckBox.isSelected()) {
+            double minutePrelucrare = 0.0;
+
+            Polizare polizare = new Polizare();
+
+            double pret = 0.0;
+            TableViewItem item = new TableViewItem(polizare.getDenumireProces(), polizare.getUnitateDeMasura(), minutePrelucrare, pret);
+            tableItems.add(item);
+
+            item.getCantitateTextField().textProperty().addListener((observable, oldValue, newValue) -> {
+                double newMinutePrelucrare;
+                try {
+                    newMinutePrelucrare = Double.parseDouble(newValue);
+                } catch (NumberFormatException e) {
+                    item.getPretLabel().setText("Invalid");
+                    return;
+                }
+                polizare.setMinutePrelucrare(newMinutePrelucrare);
+                item.getPretLabel().setText(String.format("%.2f", polizare.calculPretProces()));
+                tableView.refresh();
+            });
+
+            // Resetare câmpuri după adăugare
+            PolizareCheckBox.setSelected(false);
+        }
     }
+
+
+    @FXML
+    public void adaugaProdusInComanda() {
+        String denumireProdus = denumireProdusField.getText();
+        double pretFaraTva = calculateTotalFaraTva();
+        double profit = profitField.getText().isEmpty() ? 0 : Double.parseDouble(profitField.getText());
+        double pretTotalFaraTva = pretFaraTva + (pretFaraTva * (profit / 100));
+        double pretTotalCuTva = pretTotalFaraTva * 1.19;
+        int cantitate = 1; // Poate fi modificat ulterior de utilizator
+
+        Comanda produs = new Comanda(denumireProdus, pretTotalFaraTva, pretTotalCuTva, profit);
+        produs.setCantitate(cantitate);
+        comenzi.add(produs);
+
+        // Actualizare etichete totaluri
+        totalFaraTvaField.setText(String.format("%.2f", pretTotalFaraTva));
+        totalCuTvaField.setText(String.format("%.2f", pretTotalCuTva));
+
+        denumireProdusField.clear();
+        tableItems.clear();
+    }
+
+    @FXML
+    public void editareProdus() {
+        Comanda selectedProdus = comandaTableView.getSelectionModel().getSelectedItem();
+        if (selectedProdus != null) {
+            denumireProdusField.setText(selectedProdus.getDenumireProdus());
+            profitField.setText(Double.toString(selectedProdus.getProfit()));
+
+            tableItems.clear();
+            tableItems.addAll(selectedProdus.getTableItems());
+        }
+    }
+
+    @FXML
+    public void stergeProdus() {
+        Comanda selectedProdus = comandaTableView.getSelectionModel().getSelectedItem();
+        if (selectedProdus != null) {
+            comandaTableView.getItems().remove(selectedProdus);
+        }
+    }
+
+    private double calculateTotalFaraTva() {
+        double total = 0.0;
+        for (TableViewItem item : tableItems) {
+            total += Double.parseDouble(item.getPretLabel().getText());
+        }
+        return total;
+}
 }
