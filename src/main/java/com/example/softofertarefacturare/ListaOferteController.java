@@ -1,11 +1,20 @@
 package com.example.softofertarefacturare;
 
 import com.example.softofertarefacturare.BD.BazaDate;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.*;
+import java.util.Objects;
 
 public class ListaOferteController {
 
@@ -30,6 +39,8 @@ public class ListaOferteController {
     @FXML
 
     private Button veziProdButton;
+
+
 
 
     public  void initialize() throws SQLException {
@@ -132,5 +143,18 @@ public class ListaOferteController {
         System.out.println("Valori oferte: \n" + valoriOferte.toString());
     }
 
+    public void switchToDecPanou(ActionEvent event) throws IOException, SQLException {
+
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/softofertarefacturare/viewProduseleDinOferta.fxml")));
+
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+
+
+    }
 
 }

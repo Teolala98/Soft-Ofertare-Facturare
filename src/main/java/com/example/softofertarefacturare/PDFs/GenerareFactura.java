@@ -13,12 +13,5 @@ public class GenerareFactura {
     }
 
 
-    public boolean finalizare_comanda() {
-
-
-
-
-        return true;
-    }
 
 }
