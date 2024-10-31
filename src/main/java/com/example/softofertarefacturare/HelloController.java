@@ -5,8 +5,11 @@ import com.example.softofertarefacturare.BD.UserDAO;
 import com.example.softofertarefacturare.Procese.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -14,6 +17,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Objects;
 
 public class HelloController {
     @FXML
@@ -61,6 +66,7 @@ public class HelloController {
     private final ObservableList<TableViewItem> tableItems = FXCollections.observableArrayList();
     private final ObservableList<Comenzi> comenzi = FXCollections.observableArrayList();
     private UserDAO userDAO = new UserDAO();
+    private ListaOferteController vezioferte=new ListaOferteController();
 
     public void initialize() {
 
@@ -279,6 +285,21 @@ public class HelloController {
 
         totalFaraTvaLabel.setText("Total fără TVA: " + String.format("%.2f", totalFaraTva) + " lei");
         totalCuTvaLabel.setText("Total cu TVA: " + String.format("%.2f", totalCuTva) + " lei");
+    }
+
+
+    public void switchToDecPanou(ActionEvent event) throws IOException, SQLException {
+
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/softofertarefacturare/lista_oferte.fxml")));
+
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+
+
     }
 
 

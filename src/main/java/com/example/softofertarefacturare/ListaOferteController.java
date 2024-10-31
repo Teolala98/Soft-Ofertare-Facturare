@@ -1,102 +1,136 @@
 package com.example.softofertarefacturare;
 
 import com.example.softofertarefacturare.BD.BazaDate;
-import com.example.softofertarefacturare.Job.Oferta;
-import com.example.softofertarefacturare.Procese.Comenzi;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.time.LocalDate;
+import java.sql.*;
 
 public class ListaOferteController {
 
-    @FXML
-    private ListView<Oferta> oferteListView;
-    @FXML
-    private TableView<Comenzi> produseTableView;
-    @FXML
-    private TableColumn<Comenzi, String> denumireProdusColumn;
-    @FXML
-    private TableColumn<Comenzi, Integer> cantitateColumn;
-    @FXML
-    private TableColumn<Comenzi, Double> pretTotalColumn;
 
-    private ObservableList<Oferta> oferteList = FXCollections.observableArrayList();
-    private ObservableList<Comenzi> produseList = FXCollections.observableArrayList();
 
     @FXML
-    public void initialize() {
-        loadOferte();
-        setupTableColumns();
 
-        oferteListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                loadProduseForOferta(newValue);
-            }
-        });
+    private Label labelNumar;
+
+    @FXML
+
+    private Label labelPretTVA;
+
+    @FXML
+
+    private Label labelPretFara;
+
+    @FXML
+
+    private Label labelData;
+
+    @FXML
+
+    private Button veziProdButton;
+
+
+    public  void initialize() throws SQLException {
+
+        VeziOferte();
+        VeziData();
+        VeziPretCuTVA();
+        VeziPretFara();
+
     }
 
-    private void loadOferte() {
-        try {
-            Connection conn = BazaDate.getConnection();
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT idoferte, data FROM oferta");
+    public void VeziOferte() throws SQLException {
+        String query = "SELECT idoferte FROM oferte.oferta";
+        StringBuilder valoriOferte = new StringBuilder();
+
+        try (Connection conn = BazaDate.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
-                int idOferte = rs.getInt("idoferte");
-                LocalDate data = rs.getDate("data").toLocalDate();
-
-                oferteList.add(new Oferta(idOferte, data));
+                String valoare = rs.getString("idoferte");
+                valoriOferte.append(valoare).append("\n");
             }
 
-            oferteListView.setItems(oferteList);
-        } catch (Exception e) {
+            labelNumar.setText(valoriOferte.toString());
+
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-    @FXML
-    private void onOfertaSelected() {
-        Oferta selectedOferta = oferteListView.getSelectionModel().getSelectedItem();
-        if (selectedOferta != null) {
-            loadProduseForOferta(selectedOferta); // Încarcă produsele pentru oferta selectată
-        }
+
+        System.out.println("Valori oferte: \n" + valoriOferte.toString());
     }
 
-    private void setupTableColumns() {
-        denumireProdusColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDenumireProdus()));
-        cantitateColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getCantitate()).asObject());
-        pretTotalColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getPretTotal()).asObject());
-    }
 
-    private void loadProduseForOferta(Oferta oferta) {
-        produseList.clear();
+    public void VeziPretCuTVA() throws SQLException {
+        String query = "SELECT pret_tva FROM oferte.oferta";
+        StringBuilder valoriOferte = new StringBuilder();
 
-        try {
-            Connection conn = BazaDate.getConnection();
-            Statement stmt = conn.createStatement();
-            String sql = "SELECT denumire_produs, cantitate, pret FROM produse_oferta WHERE id_oferta = " + oferta.getIdOferte();
-            ResultSet rs = stmt.executeQuery(sql);
+        try (Connection conn = BazaDate.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
-                String denumireProdus = rs.getString("denumire_produs");
-                int cantitate = rs.getInt("cantitate");
-                double pret = rs.getDouble("pret");
-                produseList.add(new Comenzi(denumireProdus, pret, pret * 1.19, 0, pret));
+                String valoare = rs.getString("pret_tva");
+                valoriOferte.append(valoare).append("\n");
             }
 
-            produseTableView.setItems(produseList);
-        } catch (Exception e) {
+            labelPretTVA.setText(valoriOferte.toString());
+
+        } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        System.out.println("Valori oferte: \n" + valoriOferte.toString());
     }
+
+
+    public void VeziPretFara() throws SQLException {
+        String query = "SELECT pret_total FROM oferte.oferta";
+        StringBuilder valoriOferte = new StringBuilder();
+
+        try (Connection conn = BazaDate.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                String valoare = rs.getString("pret_total");
+                valoriOferte.append(valoare).append("\n");
+            }
+
+            labelPretFara.setText(valoriOferte.toString());
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Valori oferte: \n" + valoriOferte.toString());
+    }
+
+
+    public void VeziData() throws SQLException {
+        String query = "SELECT data FROM oferte.oferta";
+        StringBuilder valoriOferte = new StringBuilder();
+
+        try (Connection conn = BazaDate.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                String valoare = rs.getString("data");
+                valoriOferte.append(valoare).append("\n");
+            }
+
+            labelData.setText(valoriOferte.toString());
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Valori oferte: \n" + valoriOferte.toString());
+    }
+
+
 }

@@ -29,7 +29,7 @@ public class Factura {
 
     private int citesteNrFacturaDinFisier() {
         int nr_factura =0;
-        try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\maria\\OneDrive\\Desktop\\facultate si proiecte\\oop\\proiect 3\\src\\main\\java\\PDFs\\nrFactura"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\maria\\OneDrive\\Desktop\\facultate si proiecte\\oop\\proiect 3\\src\\main\\java\\com\\example\\softofertarefacturare\\PDFs\\nrFactura"))) {
             nr_factura = Integer.parseInt(reader.readLine());
             System.out.println(nr_factura);
         } catch (IOException | NumberFormatException e) {
@@ -40,7 +40,7 @@ public class Factura {
 
 
     private void scrieNrFacturaInFisier(int nr_factura) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\maria\\OneDrive\\Desktop\\facultate si proiecte\\oop\\proiect 3\\src\\main\\java\\PDFs\\nrFactura"))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\maria\\OneDrive\\Desktop\\facultate si proiecte\\oop\\proiect 3\\src\\main\\java\\com\\example\\softofertarefacturare\\PDFs\\nrFactura"))) {
             writer.write(String.valueOf(nr_factura));
         } catch (IOException e) {
             System.out.println("Nu s-a putut scrie în fișier: " + e.getMessage());

@@ -17,10 +17,10 @@ module com.example.softofertarefacturare {
     requires layout;
     requires java.sql;
 
-    opens com.example.softofertarefacturare to javafx.fxml;
     exports com.example.softofertarefacturare;
     opens com.example.softofertarefacturare.Procese to javafx.base;
     exports com.example.softofertarefacturare.BD;
+    opens com.example.softofertarefacturare to javafx.base, javafx.fxml;
 
 
 }

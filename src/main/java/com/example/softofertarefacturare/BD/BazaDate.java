@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 public class BazaDate {
 
-    private static final String URL = "jdbc:mysql://127.0.0.1:3306/oferte?user=root";
-    private static final String USER = "root";
-    private static final String PASSWORD = "1234";
+    private static final String URL = "jdbc:mysql://127.0.0.1:3306/oferte?user=maria";
+    private static final String USER = "maria";
+    private static final String PASSWORD = "2004-2017Mm";
 
     public static Connection getConnection() {
         Connection connection = null;

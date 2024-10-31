@@ -188,7 +188,7 @@
                                      <Button fx:id="editareComandaButton" mnemonicParsing="false" onAction="#editareProdus" prefHeight="25.0" prefWidth="141.0" text="Editeaza Produs" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
                                      <Button fx:id="stergeComandaButton" mnemonicParsing="false" onAction="#stergeProdus" prefHeight="25.0" prefWidth="140.0" text="Sterge Produs" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" />
                                      <Button alignment="CENTER" mnemonicParsing="false" onAction="#CreazaOferta_" prefHeight="25.0" prefWidth="180.0" text="Creaza Oferta" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                              <Button fx:id="VeziOferte" mnemonicParsing="false" onAction="#VeziOferte" prefHeight="25.0" prefWidth="171.0" text="Vezi Toate Ofertele" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <Button fx:id="VeziOferte" mnemonicParsing="false" onAction="#switchToDecPanou" prefHeight="25.0" prefWidth="171.0" text="Vezi Toate Ofertele" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                  </children>
                                  <padding>
                                      <Insets left="16.0" right="16.0" />
