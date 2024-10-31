@@ -292,7 +292,7 @@
       <children>
          <FlowPane layoutX="40.0" layoutY="41.0" prefHeight="200.0" prefWidth="200.0">
             <children>
-               <Label text="Necesar Materiale" />
+               <Label text="Necesar com.example.softofertarefacturare.Materiale" />
                 <VBox alignment="TOP_LEFT" spacing="10">
                     <Label fx:id="necesarLabel" style="-fx-font-size: 14px; -fx-font-family: 'Segoe UI';" wrapText="true" />
                     <Label fx:id="totalPreturiLabel" style="-fx-font-size: 14px; -fx-font-family: 'Segoe UI';" text="Total preturi: 0 lei" wrapText="true" />

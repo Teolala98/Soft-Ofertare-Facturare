@@ -1,4 +1,4 @@
-package PDFs;
+package com.example.softofertarefacturare.PDFs;
 
 
 

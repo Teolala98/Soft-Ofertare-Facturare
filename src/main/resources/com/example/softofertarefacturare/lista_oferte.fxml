@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.softofertarefacturare.Facturare"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.softofertarefacturare.ListaOferteController" spacing="10">
+   <ListView fx:id="oferteListView" onMouseClicked="#onOfertaSelected" />
+   <TableView fx:id="produseTableView">
+      <columns>
+         <TableColumn fx:id="denumireProdusColumn" text="Denumire Produs" />
+         <TableColumn fx:id="cantitateColumn" text="Cantitate" />
+         <TableColumn fx:id="pretTotalColumn" text="Preț Total" />
+      </columns>
+   </TableView>
+</VBox>

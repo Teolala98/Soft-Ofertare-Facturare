@@ -1,4 +1,4 @@
-package Procese;
+package com.example.softofertarefacturare.Procese;
 
 public class DecupatLaser {
     private static final Double pretCurentMin = 0.65;

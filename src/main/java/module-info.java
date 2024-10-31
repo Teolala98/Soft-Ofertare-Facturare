@@ -3,6 +3,7 @@ module com.example.softofertarefacturare {
     requires javafx.fxml;
     requires javafx.web;
 
+
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
     requires net.synedra.validatorfx;
@@ -14,7 +15,12 @@ module com.example.softofertarefacturare {
     requires io;
     requires kernel;
     requires layout;
+    requires java.sql;
 
     opens com.example.softofertarefacturare to javafx.fxml;
     exports com.example.softofertarefacturare;
+    opens com.example.softofertarefacturare.Procese to javafx.base;
+    exports com.example.softofertarefacturare.BD;
+
+
 }

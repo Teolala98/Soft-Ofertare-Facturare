@@ -1,6 +1,4 @@
-package Procese;
-
-import javafx.scene.control.Alert;
+package com.example.softofertarefacturare.Procese;
 
 public class IndoitTabla extends AtributeProces implements Proces {
 
