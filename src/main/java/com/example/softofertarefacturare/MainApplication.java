@@ -34,7 +34,7 @@ public class MainApplication extends Application {
                     Parent root = fxmlLoader.load();
 
                     Scene mainScene = new Scene(root, 900, 1000);
-                    primaryStage.setTitle("Calcul Materiale");
+                    primaryStage.setTitle("Calcul com.example.softofertarefacturare.Materiale");
                     primaryStage.setScene(mainScene);
 
                     primaryStage.setOnCloseRequest(event -> System.exit(0));

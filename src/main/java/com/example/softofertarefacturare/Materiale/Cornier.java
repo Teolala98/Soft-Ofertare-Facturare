@@ -1,23 +1,23 @@
-package Materiale;
+package com.example.softofertarefacturare.Materiale;
 
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 
-public class Platbanda extends Material implements CalculMaterial {
+public class Cornier extends Material implements CalculMaterial {
     private double latura;
     private double grosime;
     private double lungime;
     public double pretML;
 
-    public Platbanda() {}
+    public Cornier() {}
 
     @Override
     public double calcPret() {
         return lungime/1000 * this.pretML;
     }
 
-    public Platbanda(double latura, double grosime, double lungime, double pretML) {
+    public Cornier(double latura, double grosime, double lungime, double pretML) {
         this.latura = latura;
         this.grosime = grosime;
         this.lungime = lungime;
@@ -28,7 +28,7 @@ public class Platbanda extends Material implements CalculMaterial {
         try {
             this.latura = Double.parseDouble(laturaField.getText());
             this.grosime = Double.parseDouble(grosimeField.getText());
-            this.lungime = Double.parseDouble(lungimeField.getText())*1000;
+            this.lungime = Double.parseDouble(lungimeField.getText());
             this.pretML = Double.parseDouble(pretMLField.getText());
 
             if (latura <= 0 || grosime <= 0 || lungime <= 0 || pretML <= 0) {
@@ -43,7 +43,7 @@ public class Platbanda extends Material implements CalculMaterial {
 
     @Override
     public double calcSuprafata() {
-        return latura * grosime * lungime / 1000000;
+        return 2 * latura * grosime * lungime / 1000000;
     }
 
     @Override
@@ -65,13 +65,8 @@ public class Platbanda extends Material implements CalculMaterial {
     @Override
     public String getDetalii() {
         return String.format("%.0f", getLatura()) + "x" +
-                            String.format("%.0f", getGrosime()) + " mm";
-    }
-
-    public String toString(){
-        return "Greutatea: " + calcGreutate() + "kg\n" +
-                "Suprafata: " + calcSuprafata() + "mp\n" +
-                "Pret: " + calcPret() + "lei";
+                String.format("%.0f", getLatura()) + "x" +
+                String.format("%.0f", getGrosime()) + " mm";
     }
 
     public double getLatura() { return latura; }

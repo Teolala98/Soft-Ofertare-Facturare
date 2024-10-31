@@ -1,6 +1,6 @@
 package com.example.softofertarefacturare;
 
-import PDFs.GenerareFactura;
+import com.example.softofertarefacturare.PDFs.GenerareFactura;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

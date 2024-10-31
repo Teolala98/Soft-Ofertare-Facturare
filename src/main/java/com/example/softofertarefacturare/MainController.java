@@ -1,7 +1,7 @@
 package com.example.softofertarefacturare;
 
 
-import Materiale.*;
+import com.example.softofertarefacturare.Materiale.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;

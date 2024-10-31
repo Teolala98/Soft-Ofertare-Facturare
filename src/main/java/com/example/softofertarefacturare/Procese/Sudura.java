@@ -1,6 +1,6 @@
 
 
-package Procese;
+package com.example.softofertarefacturare.Procese;
 
     public class Sudura extends AtributeProces implements Proces {
 

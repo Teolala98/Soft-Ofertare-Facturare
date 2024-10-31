@@ -24,4 +24,11 @@ public class TableViewItem {
     public void setCantitateTextField(TextField cantitateTextField) { this.cantitateTextField = cantitateTextField; }
     public Label getPretLabel() { return pretLabel; }
     public void setPretLabel(Label pretLabel) { this.pretLabel = pretLabel; }
+    public double getCantitate() {
+        try {
+            return Double.parseDouble(cantitateTextField.getText());
+        } catch (NumberFormatException e) {
+            return 0.0; // Or handle it as you prefer
+        }
+    }
 }

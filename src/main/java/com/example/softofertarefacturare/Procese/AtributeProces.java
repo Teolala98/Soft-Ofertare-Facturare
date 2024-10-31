@@ -1,6 +1,4 @@
-package Procese;
-
-import java.security.PublicKey;
+package com.example.softofertarefacturare.Procese;
 
 public abstract class AtributeProces {
 
@@ -26,6 +24,9 @@ public abstract class AtributeProces {
         this.unitateDeMasura=unitateDeMasura;
         this.denumireProces=denumireProces;
     }
+
+
+    public abstract double calculPretProces();
 
     public Double getMinutePrelucrare() {
         return minutePrelucrare;
@@ -82,4 +83,5 @@ public abstract class AtributeProces {
     public void setUnitateDeMasura(String unitateDeMasura) {
         this.unitateDeMasura = unitateDeMasura;
     }
+
 }

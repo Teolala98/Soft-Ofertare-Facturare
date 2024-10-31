@@ -1,37 +1,37 @@
-package Materiale;
+package com.example.softofertarefacturare.Materiale;
 
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 
-public class Cornier extends Material implements CalculMaterial {
-    private double latura;
+public class TeavaRotunda extends Material implements CalculMaterial {
+    private double diametru;
     private double grosime;
     private double lungime;
     public double pretML;
 
-    public Cornier() {}
+    public TeavaRotunda() {}
 
     @Override
     public double calcPret() {
         return lungime/1000 * this.pretML;
     }
 
-    public Cornier(double latura, double grosime, double lungime, double pretML) {
-        this.latura = latura;
+    public TeavaRotunda(double diametru, double grosime, double lungime, double pretML) {
+        this.diametru = diametru;
         this.grosime = grosime;
         this.lungime = lungime;
         this.pretML = pretML;
     }
 
-    public void introducereDateFromUI(TextField laturaField, TextField grosimeField, TextField lungimeField, TextField pretMLField) {
+    public void introducereDateFromUI(TextField diametruField, TextField grosimeField, TextField lungimeField, TextField pretMLField) {
         try {
-            this.latura = Double.parseDouble(laturaField.getText());
+            this.diametru = Double.parseDouble(diametruField.getText());
             this.grosime = Double.parseDouble(grosimeField.getText());
-            this.lungime = Double.parseDouble(lungimeField.getText());
+            this.lungime = Double.parseDouble(lungimeField.getText())*1000;
             this.pretML = Double.parseDouble(pretMLField.getText());
 
-            if (latura <= 0 || grosime <= 0 || lungime <= 0 || pretML <= 0) {
+            if (diametru <= 0 || grosime <= 0 || lungime <= 0 || pretML <= 0) {
                 throw new IllegalArgumentException("Valorile introduse trebuie sa fie mai mari decat 0");
             }
         } catch (NumberFormatException e) {
@@ -43,14 +43,14 @@ public class Cornier extends Material implements CalculMaterial {
 
     @Override
     public double calcSuprafata() {
-        return 2 * latura * grosime * lungime / 1000000;
+        return Math.PI * diametru * lungime / 1000000;
     }
 
     @Override
     public double calcGreutate() {
         double densitate = "Otel".equalsIgnoreCase(this.getMaterial()) ? DensitateMateriale.densitateOtel :
                 "Inox".equalsIgnoreCase(this.getMaterial()) ? DensitateMateriale.densitateInox : 0;
-        return densitate * calcSuprafata();
+        return densitate * calcSuprafata() * grosime;
     }
 
 
@@ -61,16 +61,21 @@ public class Cornier extends Material implements CalculMaterial {
         alert.setContentText(message);
         alert.showAndWait();
     }
-
     @Override
     public String getDetalii() {
-        return String.format("%.0f", getLatura()) + "x" +
-                String.format("%.0f", getLatura()) + "x" +
-                String.format("%.0f", getGrosime()) + " mm";
+        return String.format("%.0f", getDiametru()) + "x" +
+               String.format("%.0f", getGrosime()) + " mm";
     }
 
-    public double getLatura() { return latura; }
-    public void setLatura(double latura) { this.latura = latura; }
+    public String toString(){
+        return "Greutatea: " + calcGreutate() + "kg\n" +
+                "Suprafata: " + calcSuprafata() + "mp\n" +
+                "Pret: " + calcPret()+ "lei";
+    }
+
+
+    public double getDiametru() { return diametru; }
+    public void setDiametru(double diametru) { this.diametru = diametru; }
 
     public double getGrosime() { return grosime; }
     public void setGrosime(double grosime) { this.grosime = grosime; }

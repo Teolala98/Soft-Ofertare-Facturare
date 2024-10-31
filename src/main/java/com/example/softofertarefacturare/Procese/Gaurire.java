@@ -1,4 +1,4 @@
-package Procese;
+package com.example.softofertarefacturare.Procese;
 
 public class Gaurire extends AtributeProces implements Proces {
 
