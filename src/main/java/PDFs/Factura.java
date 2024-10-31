@@ -64,16 +64,6 @@ public class Factura {
 
             Document document = new Document(pdfDocument);
 
-           /* String image_path = "C:\\Users\\maria\\OneDrive\\Desktop\\facultate si proiecte\\oop\\proiect1\\src\\haine.jpeg";
-            ImageData imageData = ImageDataFactory.create(image_path);
-            Image image = new Image(imageData);
-            float x = pdfDocument.getDefaultPageSize().getWidth() / 2;
-            float y = pdfDocument.getDefaultPageSize().getHeight() / 2;
-            image.setFixedPosition(x, y);
-            image.setOpacity(0.1f);
-
-            document.add(image);
-*/
 
 
             float sevencol=190f;
@@ -102,12 +92,20 @@ public class Factura {
 
             table.addCell(new Cell().add(impartit).setBorder(Border.NO_BORDER));
 
+
+
+            Table table2=new Table(fullWidth);
+
+            table2.addCell(new Cell().add(new Paragraph("Conform oferta de pret nr. .... din data (data de pe oferta)")).setFontSize(7f).setBorder(Border.NO_BORDER));
+
+
             Border gb = new SolidBorder(ColorConstants.GRAY, 1f / 2f);
             Table divider = new Table(fullWidth);
             divider.setBorder(gb);
 
 
             document.add(table);
+            document.add(table2);
             document.add(onesp);
             document.add(divider);
             document.add(onesp);
@@ -123,16 +121,16 @@ public class Factura {
             Table two_col_table2 = new Table(two_column_width);
             two_col_table2.addCell(get_cell_10f_left("Companie", true));
             two_col_table2.addCell(get_cell_10f_left("Nume", true));
-            two_col_table2.addCell(get_cell_10f_left("", false));
+            two_col_table2.addCell(get_cell_10f_left(" CONSTRUCTII METALICE PE GUSTUL TAU SRL", false));
             two_col_table2.addCell(get_cell_10f_left("", false));
 
 
             document.add(two_col_table2);
 
             Table two_col_table3 = new Table(two_column_width);
-            two_col_table3.addCell(get_cell_10f_left("Nume", true));
+            two_col_table3.addCell(get_cell_10f_left("CIF", true));
             two_col_table3.addCell(get_cell_10f_left("Adresa", true));
-            two_col_table3.addCell(get_cell_10f_left("", false));
+            two_col_table3.addCell(get_cell_10f_left("46761328", false));
             two_col_table3.addCell(get_cell_10f_left("", false));
 
 
@@ -143,8 +141,8 @@ public class Factura {
 
             two_col_table4.addCell(get_cell_10f_left("Adresa", true));
             two_col_table4.addCell(get_cell_10f_left(" Nr. de telefon", true));
-            two_col_table4.addCell(get_cell_10f_left("", false));
-            two_col_table4.addCell(get_cell_10f_left(" ", false));
+            two_col_table4.addCell(get_cell_10f_left("Mun. Reghin, str. Iernuțeni nr. 120, Hală Metarox, jud. Mures", false));
+            two_col_table4.addCell(get_cell_10f_left(" 0712345678 ", false));
 
 
             document.add(two_col_table4);
@@ -153,8 +151,8 @@ public class Factura {
             float one_col_width[] = {twocol150};
 
             Table one_col_table1 = new Table(one_col_width);
-            one_col_table1.addCell(get_cell_10f_left("Email", true));
-            one_col_table1.addCell(get_cell_10f_left("", false));
+            one_col_table1.addCell(get_cell_10f_left("Reg.com", true));
+            one_col_table1.addCell(get_cell_10f_left("J26/1651/2022", false));
 
 
             document.add(one_col_table1.setMarginBottom(10f));
@@ -184,7 +182,7 @@ public class Factura {
 
             document.add(seven_col_table1);
 
-            Table three_col_table2 = new Table(three_col_width);
+            Table seven_col_table2 = new Table(seven_col_width);
 
 
            /* if (produse != null) {
@@ -201,7 +199,7 @@ public class Factura {
                         three_col_table2.addCell(new Cell().add(new Paragraph("Nu exista produse")).setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.RIGHT));
                     }
                 }*/
-                document.add(three_col_table2.setMarginBottom(20f));
+                document.add(seven_col_table2.setMarginBottom(20f));
            // }
 
 
@@ -216,11 +214,15 @@ public class Factura {
             Table three_col_table3 = new Table(three_col_width);
             three_col_table3.addCell(new Cell().add(new Paragraph("")).setBorder(Border.NO_BORDER).setMarginLeft(10f));
             three_col_table3.addCell((new Cell().add(new Paragraph("Total prod:")).setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.CENTER)));
-           // three_col_table3.addCell(new Cell().setBorder(Border.NO_BORDER).add(new Paragraph(String.valueOf(cantitate + " buc"))).setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.RIGHT).setMarginRight(15f));
+            three_col_table3.addCell(new Cell().setBorder(Border.NO_BORDER).add(new Paragraph(String.valueOf(/*cantitate + */" buc"))).setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.RIGHT).setMarginRight(15f));
 
             three_col_table3.addCell(new Cell().add(new Paragraph("")).setBorder(Border.NO_BORDER).setMarginLeft(10f));
-            three_col_table3.addCell((new Cell().add(new Paragraph("Total cost:")).setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.CENTER)));
-            //three_col_table3.addCell(new Cell().setBorder(Border.NO_BORDER).add(new Paragraph(String.valueOf(cos_cumparaturi.total_cost() + " LEI"))).setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.RIGHT).setMarginRight(15f));
+            three_col_table3.addCell((new Cell().add(new Paragraph("Total cost(fara tva):")).setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.CENTER)));
+            three_col_table3.addCell(new Cell().setBorder(Border.NO_BORDER).add(new Paragraph(String.valueOf(/*cos_cumparaturi.total_cost() + */" LEI"))).setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.RIGHT).setMarginRight(15f));
+
+            three_col_table3.addCell(new Cell().add(new Paragraph("")).setBorder(Border.NO_BORDER).setMarginLeft(10f));
+            three_col_table3.addCell((new Cell().add(new Paragraph("Total cost(cu tva):")).setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.CENTER)));
+            three_col_table3.addCell(new Cell().setBorder(Border.NO_BORDER).add(new Paragraph(String.valueOf(/*cos_cumparaturi.total_cost() + */" LEI"))).setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.RIGHT).setMarginRight(15f));
 
 
             document.add(three_col_table3);
