@@ -1,11 +1,19 @@
 package com.example.softofertarefacturare;
 
+
+import com.example.softofertarefacturare.BD.UserDAO;
 import com.example.softofertarefacturare.Procese.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class HelloController {
     @FXML
@@ -38,6 +46,8 @@ public class HelloController {
     private Label totalCuTvaLabel;
     @FXML
     private Label totalFaraTvaLabel;
+    @FXML
+    private Button VeziOferte;
 
     @FXML
     private TableView<Comenzi> comandaTableView;
@@ -50,6 +60,7 @@ public class HelloController {
 
     private final ObservableList<TableViewItem> tableItems = FXCollections.observableArrayList();
     private final ObservableList<Comenzi> comenzi = FXCollections.observableArrayList();
+    private UserDAO userDAO = new UserDAO();
 
     public void initialize() {
 
@@ -185,6 +196,38 @@ public class HelloController {
 
     }
 
+    @FXML
+    public void CreazaOferta_() {
+        // Calculate the total price with and without VAT
+        double pretTotalFaraTva = calculateTotalFaraTva();
+        double profit = profitField.getText().isEmpty() ? 0 : Double.parseDouble(profitField.getText());
+        double pretTotalFaraTvaWithProfit = pretTotalFaraTva + (pretTotalFaraTva * (profit / 100));
+        double pretTotalCuTva = pretTotalFaraTvaWithProfit * 1.19;
+
+        // Insert offer into the database and retrieve the generated id_oferta
+        int idOferta = userDAO.insertOferta(pretTotalFaraTvaWithProfit, pretTotalCuTva);
+
+        // Check if the idOferta is valid before proceeding
+        if (idOferta != -1) {
+            // Insert each product in the comandaTableView into the produse_oferta table
+            for (Comenzi produs : comandaTableView.getItems()) {
+                String denumireProdus = produs.getDenumireProdus();
+                int cantitate = produs.getCantitate();
+                double pret = produs.getPretTotalFaraTva();
+                userDAO.insertProdus(idOferta, denumireProdus, cantitate, pret); // Pass the idOferta
+            }
+
+            // Clear the table and update labels
+            comandaTableView.getItems().clear();
+            updateTotalLabels();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Oferta a fost creată cu succes!", ButtonType.OK);
+            alert.showAndWait();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Eroare la crearea ofertei!", ButtonType.OK);
+            alert.showAndWait();
+        }
+    }
+
 
 
     @FXML
@@ -193,6 +236,27 @@ public class HelloController {
         if (selectedProdus != null) {
             comandaTableView.getItems().remove(selectedProdus);
             updateTotalLabels();
+        }
+    }
+
+    @FXML
+    public void VeziOferte(){
+        try {
+            // Încarcă FXML-ul pentru ListaOferte
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("path/to/lista_oferte.fxml"));
+            BorderPane newSceneRoot = loader.load();
+
+            // Crează o nouă scenă și o fereastră
+            Stage stage = (Stage) VeziOferte.getScene().getWindow(); // Asigură-te că ai un fx:id pentru buton
+            Scene newScene = new Scene(newSceneRoot);
+            stage.setScene(newScene);
+            stage.show();
+
+            // Obține controllerul pentru ListaOferte (opțional, dacă ai nevoie să apelezi metode din el)
+            ListaOferteController listaOferteController = loader.getController();
+            // Poți apela metode din listaOferteController dacă este necesar
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -216,4 +280,6 @@ public class HelloController {
         totalFaraTvaLabel.setText("Total fără TVA: " + String.format("%.2f", totalFaraTva) + " lei");
         totalCuTvaLabel.setText("Total cu TVA: " + String.format("%.2f", totalCuTva) + " lei");
     }
+
+
 }

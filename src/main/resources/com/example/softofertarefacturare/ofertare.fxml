@@ -140,7 +140,7 @@
                               <Insets bottom="16.0" top="16.0" />
                            </padding>
                              </Label>
-                             <VBox prefHeight="886.0" prefWidth="574.0">
+                             <VBox prefHeight="755.0" prefWidth="574.0">
                                  <children>
                                      <TextField fx:id="profitField" prefHeight="25.0" prefWidth="336.0" promptText="Profit (%)">
                                  <VBox.margin>
@@ -180,26 +180,20 @@
                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                  </columnConstraints>
                                  <rowConstraints>
+                                     <RowConstraints />
                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                     <Button fx:id="editareComandaButton" mnemonicParsing="false" onAction="#editareProdus" prefHeight="25.0" prefWidth="141.0" text="Editeaza Produs" GridPane.halignment="RIGHT" />
-                                     <Button fx:id="stergeComandaButton" mnemonicParsing="false" onAction="#stergeProdus" prefHeight="25.0" prefWidth="140.0" text="Sterge Produs" GridPane.columnIndex="1" GridPane.halignment="LEFT" />
+                                     <Button fx:id="editareComandaButton" mnemonicParsing="false" onAction="#editareProdus" prefHeight="25.0" prefWidth="141.0" text="Editeaza Produs" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                                     <Button fx:id="stergeComandaButton" mnemonicParsing="false" onAction="#stergeProdus" prefHeight="25.0" prefWidth="140.0" text="Sterge Produs" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" />
+                                     <Button alignment="CENTER" mnemonicParsing="false" onAction="#CreazaOferta_" prefHeight="25.0" prefWidth="180.0" text="Creaza Oferta" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                              <Button fx:id="VeziOferte" mnemonicParsing="false" onAction="#VeziOferte" prefHeight="25.0" prefWidth="171.0" text="Vezi Toate Ofertele" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                  </children>
                                  <padding>
                                      <Insets left="16.0" right="16.0" />
                                  </padding>
                              </GridPane>
-                             <VBox prefHeight="121.0" prefWidth="574.0">
-                                 <children>
-                                     <Button alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="180.0" text="Creaza Oferta">
-                                         <VBox.margin>
-                                             <Insets bottom="16.0" left="200.0" top="16.0" />
-                                         </VBox.margin>
-                                     </Button>
-                                 </children>
-                             </VBox>
                          </children>
                      </VBox>
                  </children>
