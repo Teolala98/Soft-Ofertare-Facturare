@@ -28,7 +28,7 @@ public class TableViewItem {
         try {
             return Double.parseDouble(cantitateTextField.getText());
         } catch (NumberFormatException e) {
-            return 0.0; // Or handle it as you prefer
+            return 0.0;
         }
     }
 }

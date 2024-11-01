@@ -12,32 +12,31 @@ import java.util.List;
 public class UserDAO {
 
 
-        // Method to insert an offer and return the generated id_oferta
         public int insertOferta(double pretTotal, double pretTva) {
             String sql = "INSERT INTO oferta (pret_total, pret_tva) VALUES (?, ?)";
-            int generatedId = -1; // Initialize to an invalid id
+            int generatedId = -1;
             try (Connection conn = BazaDate.getConnection();
                  PreparedStatement pstmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
                 pstmt.setDouble(1, pretTotal);
                 pstmt.setDouble(2, pretTva);
 
-                // Execute the insert statement
+
                 pstmt.executeUpdate();
 
-                // Retrieve the generated keys
+
                 try (ResultSet rs = pstmt.getGeneratedKeys()) {
                     if (rs.next()) {
-                        generatedId = rs.getInt(1); // Get the generated id_oferta
+                        generatedId = rs.getInt(1);
                     }
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            return generatedId; // Return the generated id_oferta
+            return generatedId;
         }
 
-        // Method to insert a product associated with an offer
+
         public void insertProdus(int idOferta, String denumireProdus, int cantitate, double pret) {
             String sql = "INSERT INTO produse_oferta (id_oferta, denumire_produs, cantitate, pret) VALUES (?, ?, ?, ?)";
 

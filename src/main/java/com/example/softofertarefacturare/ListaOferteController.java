@@ -121,7 +121,7 @@ public class ListaOferteController {
     }
 
 
-    public void VeziData() throws SQLException {
+    public String VeziData() throws SQLException {
         String query = "SELECT data FROM oferte.oferta";
         StringBuilder valoriOferte = new StringBuilder();
 
@@ -141,6 +141,8 @@ public class ListaOferteController {
         }
 
         System.out.println("Valori oferte: \n" + valoriOferte.toString());
+
+        return valoriOferte.toString();
     }
 
     public void switchToDecPanou(ActionEvent event) throws IOException, SQLException {

@@ -204,26 +204,26 @@ public class HelloController {
 
     @FXML
     public void CreazaOferta_() {
-        // Calculate the total price with and without VAT
+
         double pretTotalFaraTva = calculateTotalFaraTva();
         double profit = profitField.getText().isEmpty() ? 0 : Double.parseDouble(profitField.getText());
         double pretTotalFaraTvaWithProfit = pretTotalFaraTva + (pretTotalFaraTva * (profit / 100));
         double pretTotalCuTva = pretTotalFaraTvaWithProfit * 1.19;
 
-        // Insert offer into the database and retrieve the generated id_oferta
+
         int idOferta = userDAO.insertOferta(pretTotalFaraTvaWithProfit, pretTotalCuTva);
 
-        // Check if the idOferta is valid before proceeding
+
         if (idOferta != -1) {
-            // Insert each product in the comandaTableView into the produse_oferta table
+
             for (Comenzi produs : comandaTableView.getItems()) {
                 String denumireProdus = produs.getDenumireProdus();
                 int cantitate = produs.getCantitate();
                 double pret = produs.getPretTotalFaraTva();
-                userDAO.insertProdus(idOferta, denumireProdus, cantitate, pret); // Pass the idOferta
+                userDAO.insertProdus(idOferta, denumireProdus, cantitate, pret);
             }
 
-            // Clear the table and update labels
+
             comandaTableView.getItems().clear();
             updateTotalLabels();
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Oferta a fost creată cu succes!", ButtonType.OK);
@@ -248,19 +248,19 @@ public class HelloController {
     @FXML
     public void VeziOferte(){
         try {
-            // Încarcă FXML-ul pentru ListaOferte
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("path/to/lista_oferte.fxml"));
             BorderPane newSceneRoot = loader.load();
 
-            // Crează o nouă scenă și o fereastră
-            Stage stage = (Stage) VeziOferte.getScene().getWindow(); // Asigură-te că ai un fx:id pentru buton
+
+            Stage stage = (Stage) VeziOferte.getScene().getWindow();
             Scene newScene = new Scene(newSceneRoot);
             stage.setScene(newScene);
             stage.show();
 
-            // Obține controllerul pentru ListaOferte (opțional, dacă ai nevoie să apelezi metode din el)
+
             ListaOferteController listaOferteController = loader.getController();
-            // Poți apela metode din listaOferteController dacă este necesar
+
         } catch (IOException e) {
             e.printStackTrace();
         }

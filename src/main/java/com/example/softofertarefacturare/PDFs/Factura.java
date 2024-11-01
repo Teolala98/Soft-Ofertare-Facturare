@@ -1,6 +1,8 @@
 package com.example.softofertarefacturare.PDFs;
 
 
+import com.example.softofertarefacturare.ListaOferteController;
+import com.example.softofertarefacturare.VeziProduseDinOferteController;
 import com.itextpdf.kernel.colors.ColorConstants;
 import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
@@ -15,6 +17,7 @@ import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.properties.TextAlignment;
 
 import java.io.*;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +27,8 @@ public class Factura {
 
     LocalDate datacurenta = LocalDate.now();
     private int nr_factura;
-
+    VeziProduseDinOferteController vezi= new VeziProduseDinOferteController();
+    ListaOferteController oferte=new ListaOferteController();
 
 
     private int citesteNrFacturaDinFisier() {
@@ -72,6 +76,7 @@ public class Factura {
             float twocol150 = twocol + 150f;
             float two_column_width[] = {twocol150, twocol};
             float three_col_width[] = {threecol, threecol, threecol};
+            float four_col_width[]={threecol, threecol, threecol, fourcol};
             float seven_col_width[] = {threecol, threecol, threecol,fourcol,fivecol,sixcol,sevencol};
             float fullWidth[] = {threecol * 3};
             Paragraph onesp = new Paragraph("\n");
@@ -93,7 +98,7 @@ public class Factura {
 
             Table table2=new Table(fullWidth);
 
-            table2.addCell(new Cell().add(new Paragraph("Conform oferta de pret nr. .... din data (data de pe oferta)")).setFontSize(7f).setBorder(Border.NO_BORDER));
+            table2.addCell(new Cell().add(new Paragraph("Conform oferta de pret nr. " + vezi.VeziNrOferta() + " din data " + oferte.VeziData())).setFontSize(7f).setBorder(Border.NO_BORDER));
 
 
             Border gb = new SolidBorder(ColorConstants.GRAY, 1f / 2f);
@@ -179,25 +184,16 @@ public class Factura {
 
             document.add(seven_col_table1);
 
-            Table seven_col_table2 = new Table(seven_col_width);
+            Table four_col_table = new Table(seven_col_width);
 
 
-           /* if (produse != null) {
-                for (Tip_produs produs : produse) {
-                    if (produs != null) {
+                        four_col_table.addCell(new Cell().add(new Paragraph(vezi.VeziNrOferta())).setBorder(Border.NO_BORDER).setMarginLeft(10f));
+                        four_col_table.addCell(new Cell().add(new Paragraph(vezi.VeziDenProd())).setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.CENTER));
+                        four_col_table.addCell(new Cell().add(new Paragraph(vezi.VeziCantitate())).setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.CENTER));
+                        four_col_table.addCell(new Cell().add(new Paragraph(String.format("%.2f", vezi.VeziPret()))).setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.RIGHT));
 
+                document.add(four_col_table.setMarginBottom(20f));
 
-                        three_col_table2.addCell(new Cell().add(new Paragraph(produs.getCategorie())).setBorder(Border.NO_BORDER).setMarginLeft(10f));
-                        three_col_table2.addCell(new Cell().add(new Paragraph(produs.getMarime())).setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.CENTER));
-                        three_col_table2.addCell(new Cell().add(new Paragraph(String.format("%.2f", produs.getPret()))).setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.RIGHT));
-                    } else {
-                        three_col_table2.addCell(new Cell().add(new Paragraph("Nu exista produse")).setBorder(Border.NO_BORDER));
-                        three_col_table2.addCell(new Cell().add(new Paragraph("Nu exista produse")).setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.CENTER));
-                        three_col_table2.addCell(new Cell().add(new Paragraph("Nu exista produse")).setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.RIGHT));
-                    }
-                }*/
-                document.add(seven_col_table2.setMarginBottom(20f));
-           // }
 
 
             float onetwo[] = {threecol + 125f, threecol * 2};
@@ -253,6 +249,8 @@ public class Factura {
 
             System.out.println(" Eroare!" + e.getMessage());
             e.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
 
     }
