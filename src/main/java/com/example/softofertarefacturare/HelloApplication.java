@@ -20,7 +20,7 @@ public class HelloApplication extends Application {
         stage.setScene(scene);
         stage.show();
 
-        factura.genereaza_factura();
+
     }
 
     public static void main(String[] args) {
